@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { ReactNode } from "react";
-import { Sidebar } from "./components/Sidebar";
-import { Topbar } from "./components/Topbar";
+import { Sidebar } from "./layout/Sidebar";
+import { Topbar } from "./layout/Topbar";
 import { Access } from "./pages/Access";
 import { Login } from "./pages/Login";
 import { Dashboard } from "./pages/Dashboard";

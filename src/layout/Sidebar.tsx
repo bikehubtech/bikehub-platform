@@ -1,5 +1,5 @@
-import { Brand } from "./Brand";
-import { Icon } from "./Icon";
+import { Brand } from "../components/Brand";
+import { Icon } from "../components/Icon";
 import type { PageId } from "../types";
 
 const items: Array<{ id: PageId; label: string; icon: Parameters<typeof Icon>[0]["name"] }> = [

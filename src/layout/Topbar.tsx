@@ -1,4 +1,4 @@
-import { Icon } from "./Icon";
+import { Icon } from "../components/Icon";
 
 export function Topbar({ onMenu, onNotifications }: { onMenu: () => void; onNotifications: () => void }) {
   return (

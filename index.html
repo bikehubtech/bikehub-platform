@@ -1,41 +1,15 @@
-import { useState } from "react";
-import { Brand } from "../components/Brand";
-import { Button } from "../components/Button";
-
-export function Login({ onSuccess, onBack }: { onSuccess: () => void; onBack: () => void }) {
-  const [email, setEmail] = useState("jhonatan@bikehub.com");
-  const [password, setPassword] = useState("BikeHub@2026");
-  const [error, setError] = useState("");
-
-  function submit() {
-    if (email.trim().toLowerCase() === "jhonatan@bikehub.com" && password === "BikeHub@2026") {
-      onSuccess();
-      return;
-    }
-    setError("E-mail ou senha incorretos.");
-  }
-
-  return (
-    <main className="login-page">
-      <section className="login-panel">
-        <Brand />
-        <h1>Entrar</h1>
-        <p>Acesse com o usuário demonstrativo já cadastrado.</p>
-
-        <div className="demo-box">
-          <strong>Usuário demonstrativo</strong>
-          <span>E-mail: jhonatan@bikehub.com</span>
-          <span>Senha: BikeHub@2026</span>
-        </div>
-
-        <label>E-mail<input value={email} onChange={(e) => setEmail(e.target.value)} /></label>
-        <label>Senha<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} /></label>
-
-        {error && <div className="form-error">{error}</div>}
-
-        <Button full onClick={submit}>Entrar</Button>
-        <Button full variant="secondary" onClick={onBack}>Voltar</Button>
-      </section>
-    </main>
-  );
-}
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050B0E" />
+    <meta name="description" content="BikeHub Platform" />
+    <link rel="icon" type="image/png" href="/assets/bikehub-brand.png" />
+    <title>BikeHub Platform</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

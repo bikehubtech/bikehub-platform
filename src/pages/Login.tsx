@@ -1,0 +1,41 @@
+import { useState } from "react";
+import { Brand } from "../components/Brand";
+import { Button } from "../components/Button";
+
+export function Login({ onSuccess, onBack }: { onSuccess: () => void; onBack: () => void }) {
+  const [email, setEmail] = useState("jhonatan@bikehub.com");
+  const [password, setPassword] = useState("BikeHub@2026");
+  const [error, setError] = useState("");
+
+  function submit() {
+    if (email.trim().toLowerCase() === "jhonatan@bikehub.com" && password === "BikeHub@2026") {
+      onSuccess();
+      return;
+    }
+    setError("E-mail ou senha incorretos.");
+  }
+
+  return (
+    <main className="login-page">
+      <section className="login-panel">
+        <Brand />
+        <h1>Entrar</h1>
+        <p>Acesse com o usuário demonstrativo já cadastrado.</p>
+
+        <div className="demo-box">
+          <strong>Usuário demonstrativo</strong>
+          <span>E-mail: jhonatan@bikehub.com</span>
+          <span>Senha: BikeHub@2026</span>
+        </div>
+
+        <label>E-mail<input value={email} onChange={(e) => setEmail(e.target.value)} /></label>
+        <label>Senha<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} /></label>
+
+        {error && <div className="form-error">{error}</div>}
+
+        <Button full onClick={submit}>Entrar</Button>
+        <Button full variant="secondary" onClick={onBack}>Voltar</Button>
+      </section>
+    </main>
+  );
+}
