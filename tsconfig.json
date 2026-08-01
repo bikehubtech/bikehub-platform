@@ -1,15 +1,7 @@
-<!doctype html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#050B0E" />
-    <meta name="description" content="BikeHub Developer Preview 1.0" />
-    <link rel="icon" type="image/png" href="/assets/bikehub-brand.png" />
-    <title>BikeHub Developer Preview 1.0</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
