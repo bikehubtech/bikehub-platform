@@ -3,16 +3,16 @@ import { Brand } from "../components/Brand";
 import { Button } from "../components/Button";
 
 export function Login({ onSuccess, onBack }: { onSuccess: () => void; onBack: () => void }) {
-  const [email, setEmail] = useState("jhonatan@bikehub.com");
-  const [password, setPassword] = useState("BikeHub@2026");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   function submit() {
-    if (email.trim().toLowerCase() === "jhonatan@bikehub.com" && password === "BikeHub@2026") {
+    if (email.trim() && password) {
       onSuccess();
       return;
     }
-    setError("E-mail ou senha incorretos.");
+    setError("Preencha o e-mail e a senha.");
   }
 
   return (
@@ -20,12 +20,12 @@ export function Login({ onSuccess, onBack }: { onSuccess: () => void; onBack: ()
       <section className="login-panel">
         <Brand />
         <h1>Entrar</h1>
-        <p>Acesse com o usuário demonstrativo já cadastrado.</p>
+        <p>Acesse o ambiente demonstrativo da plataforma.</p>
 
         <div className="demo-box">
-          <strong>Usuário demonstrativo</strong>
-          <span>E-mail: jhonatan@bikehub.com</span>
-          <span>Senha: BikeHub@2026</span>
+          <strong>Ambiente demonstrativo</strong>
+          <span>A autenticação segura será integrada ao Firebase.</span>
+          <span>Nenhuma credencial é armazenada no código.</span>
         </div>
 
         <label>E-mail<input value={email} onChange={(e) => setEmail(e.target.value)} /></label>

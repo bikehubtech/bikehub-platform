@@ -23,6 +23,20 @@ npm run build
 
 O build de produção é gerado em `dist/` e está configurado para publicação no Netlify.
 
+## Fluxo de entrega
+
+```text
+GitHub → Codex → Commit → Push → Netlify Deploy Automático
+```
+
+1. O GitHub mantém a fonte oficial do projeto.
+2. O Codex trabalha em uma branch dedicada e valida as alterações localmente.
+3. As alterações aprovadas são registradas em commits organizados.
+4. A branch é enviada ao GitHub por push.
+5. O Netlify executa automaticamente `npm run build` e publica o diretório `dist/`, conforme a configuração do ambiente conectado.
+
+Não é necessário enviar arquivos manualmente ao GitHub ou ao Netlify.
+
 ## Estrutura
 
 ```text

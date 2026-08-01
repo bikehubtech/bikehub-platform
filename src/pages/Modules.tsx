@@ -116,7 +116,7 @@ export function Profile() {
   return <div className="page"><div className="page-heading page-heading--with-action"><div><h1>Perfil</h1><p>Gerencie suas informações e preferências.</p></div><Button>Salvar alterações</Button></div>
     <div className="profile-grid">
       <Card className="profile-card"><div className="profile-avatar">JI</div><h2>Jhonatan Ilha</h2><p>Membro desde maio de 2025</p><div className="tags"><span>MTB</span><span>Intermediário</span><span>Nível 2</span></div></Card>
-      <Card title="Dados pessoais"><div className="form-grid">{[["Nome completo","Jhonatan Ilha"],["E-mail","jhonatan@bikehub.com"],["Telefone","(49) 99999-9999"],["Cidade","Xaxim - SC"]].map(([label,value])=><label key={label}>{label}<input value={value} readOnly/></label>)}</div></Card>
+      <Card title="Dados pessoais"><div className="form-grid">{[["Nome completo","Jhonatan Ilha"],["E-mail","Não informado"],["Telefone","(49) 99999-9999"],["Cidade","Xaxim - SC"]].map(([label,value])=><label key={label}>{label}<input value={value} readOnly/></label>)}</div></Card>
     </div>
   </div>
 }
