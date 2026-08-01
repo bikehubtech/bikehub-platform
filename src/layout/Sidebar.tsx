@@ -19,12 +19,12 @@ export function Sidebar({
       {open && <button className="scrim" aria-label="Fechar menu" onClick={onClose} />}
       <aside className={`sidebar ${open ? "sidebar--open" : ""}`}>
         <div className="sidebar__brand">
-          <Brand />
+          <div><Brand /><p>Sua plataforma completa<br />para o mundo do ciclismo.</p></div>
           <button className="sidebar__close" onClick={onClose}><Icon name="close" /></button>
         </div>
 
         <div className="user-card">
-          <div className="user-card__avatar">JI</div>
+          <div className="user-card__avatar"><img src="/assets/dashboard-avatar.jpg" alt="Jhonatan Ilha" /></div>
           <div>
             <strong>Jhonatan Ilha</strong>
             <span>Clube · Nível 2 · 1.250 pts</span>

@@ -250,3 +250,164 @@ svg { display:block; }
   .recommendations { grid-template-columns:1fr; }
   .bike-metrics,.form-grid { grid-template-columns:1fr 1fr; }
 }
+
+/* Dashboard oficial BikeHub — referência visual v1 */
+body { background:radial-gradient(circle at 72% -12%,rgba(22,52,55,.18),transparent 36rem),#02080a; }
+.sidebar { width:286px; padding:20px 14px; background:radial-gradient(circle at 40% 2%,rgba(21,50,43,.18),transparent 19rem),linear-gradient(180deg,#010709,#030b0d 72%,#020709); border-right:1px solid #1d2b2e; box-shadow:18px 0 50px rgba(0,0,0,.24); }
+.sidebar__brand { min-height:128px; align-items:flex-start; padding:0 10px 18px; border-bottom:1px solid rgba(50,70,73,.28); }
+.sidebar__brand>div { width:100%; }
+.sidebar__brand .brand { width:225px; height:62px; border-radius:0; }
+.sidebar__brand .brand img { object-fit:contain; object-position:left center; filter:drop-shadow(0 0 14px rgba(155,227,24,.08)); }
+.sidebar__brand p { margin:4px 0 0 72px; color:#b8c0bd; font-size:12px; line-height:1.55; }
+.user-card { gap:12px; margin:18px 7px 20px; }
+.user-card__avatar { width:72px; height:72px; overflow:hidden; padding:2px; background:#071012; border:2px solid var(--green); box-shadow:0 0 0 3px rgba(155,227,24,.06),0 8px 28px rgba(0,0,0,.4); }
+.user-card__avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+.user-card strong { font-size:16px; }
+.user-card span { font-size:11px; line-height:1.6; }
+.sidebar__nav { gap:3px; }
+.sidebar__nav button { min-height:46px; border-radius:8px; padding:0 14px; font-size:14px; border:1px solid transparent; }
+.sidebar__nav button svg { width:21px; height:21px; }
+.sidebar__nav button.is-active { background:linear-gradient(90deg,#426d08,#5f970d); border-color:#83cf0e; box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 8px 24px rgba(70,117,5,.16); }
+.pro-panel,.version { display:none; }
+
+.app-main { margin-left:286px; width:calc(100% - 286px); }
+.topbar { position:fixed; top:0; right:0; left:286px; height:104px; padding:0 27px; border:0; background:linear-gradient(180deg,rgba(2,8,10,.98),rgba(2,8,10,.7),transparent); backdrop-filter:none; z-index:20; pointer-events:none; }
+.topbar>* { pointer-events:auto; }
+.topbar__search { width:340px; height:44px; border-color:#334145; background:rgba(5,12,14,.72); box-shadow:inset 0 1px 0 rgba(255,255,255,.025); }
+.icon-button { border-color:transparent; background:transparent; }
+.points-pill { min-width:142px; justify-content:center; background:rgba(12,25,10,.38); border-color:#5d8e09; }
+
+.dashboard-page { max-width:none; padding:26px 26px 14px 30px; }
+.dashboard-heading { min-height:76px; margin:0; display:flex; align-items:flex-start; }
+.dashboard-heading h1 { font-size:31px; line-height:1.1; letter-spacing:-1.1px; margin-bottom:8px; }
+.dashboard-heading h1 span { font-size:25px; }
+.dashboard-heading p { font-size:14px; color:#c1c7c5; }
+.dashboard-stats { width:calc(100% - 398px); grid-template-columns:.95fr .95fr 1.65fr; gap:13px; margin:14px 0 16px; }
+.dashboard-stats .stat-card { min-height:192px; padding:25px 20px; border-color:#2a393c; border-radius:14px; background:radial-gradient(circle at 85% 10%,rgba(19,43,42,.2),transparent 14rem),linear-gradient(145deg,#071114,#040b0d); box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 18px 48px rgba(0,0,0,.12); }
+.dashboard-stats .stat-card>svg { width:36px; height:36px; }
+.dashboard-stats .stat-card__body>span { font-size:14px; color:#e5e8e6; }
+.dashboard-stats .stat-card__body>strong { font-size:31px; line-height:1; }
+.dashboard-stats .stat-card__body>small { font-size:12px; line-height:1.5; }
+.dashboard-stats .progress { height:8px; margin-top:10px; }
+.stat-card--combined { display:grid; grid-template-columns:38px 1fr 1fr; gap:14px; }
+.stat-card--combined .stat-card__body em { color:var(--green); font-size:12px; font-style:normal; font-weight:800; }
+.stat-card--combined .stat-card__body em span { color:#a8b0ae; font-weight:400; }
+.stat-card--combined strong small { font-size:15px; font-weight:500; }
+.points-summary { border-left:1px solid #253236; padding-left:18px; display:flex; flex-direction:column; gap:7px; }
+.points-summary>svg { color:#ffc400; width:30px; height:30px; }
+.points-summary>strong { font-size:25px; }
+.points-summary>span,.points-summary>small { color:#b2bab7; font-size:11px; }
+
+.dashboard-grid { position:relative; display:grid; grid-template-columns:1.08fr 1.12fr .88fr; grid-template-rows:394px 180px; grid-template-areas:"activity performance event" "recommend stations benefits"; gap:14px; align-items:stretch; }
+.dashboard-grid>.card { border-color:#29383b; border-radius:14px; background:radial-gradient(circle at 90% 0,rgba(18,44,43,.16),transparent 19rem),linear-gradient(145deg,#071114,#040b0d); box-shadow:inset 0 1px 0 rgba(255,255,255,.025),0 20px 55px rgba(0,0,0,.13); }
+.dashboard-grid .card__header { min-height:32px; margin-bottom:10px; }
+.dashboard-grid .card__header h2 { font-size:17px; }
+.text-action { font-size:13px; font-weight:800; }
+.activity-card { grid-area:activity; }
+.performance-card { grid-area:performance; }
+.recommendations-card { grid-area:recommend; }
+.stations-card { grid-area:stations; }
+.event-card { grid-area:event; height:184px; align-self:end; }
+.benefits-card { grid-area:benefits; }
+
+.activity-list { display:grid; gap:9px; }
+.activity-row { min-height:59px; display:flex; align-items:center; gap:13px; padding:9px 12px; border:1px solid #263538; border-radius:10px; background:linear-gradient(100deg,rgba(8,18,21,.95),rgba(5,13,15,.7)); }
+.activity-row>svg:first-child { width:27px; color:var(--green); flex:none; }
+.activity-row>svg:last-child { width:18px; color:#dce1df; }
+.activity-row>div { flex:1; min-width:0; }
+.activity-row strong,.activity-row span { display:block; }
+.activity-row strong { font-size:14px; }
+.activity-row span { color:#aab3b0; font-size:11px; margin-top:3px; }
+.activity-row>small { color:#aeb5b3; text-align:right; font-size:10px; }
+.activity-row>small em { display:block; width:max-content; margin:4px 0 0 auto; padding:2px 6px; border:1px solid #70a900; border-radius:4px; color:var(--green); font-style:normal; }
+
+.chart-tabs { display:grid; grid-template-columns:repeat(3,1fr); height:44px; align-items:center; text-align:center; border:1px solid #223135; border-radius:9px; color:#aeb6b3; font-size:12px; }
+.chart-tabs>* { height:100%; display:grid; place-items:center; }
+.chart-tabs strong { color:var(--green); border-bottom:2px solid var(--green); }
+.performance-card .metric-strip { margin:8px 0 2px; gap:0; }
+.performance-card .metric-strip>span { flex:1; padding:0 12px; border-right:1px solid #293639; }
+.performance-card .metric-strip>span:first-child { padding-left:0; }
+.performance-card .metric-strip>span:last-child { border:0; }
+.performance-card .metric-strip small { display:block; color:#9fa8a5; font-size:10px; }
+.performance-card .metric-strip strong { font-size:17px; margin-top:4px; }
+.line-chart { height:210px; padding:4px 2px 0 24px; position:relative; }
+.line-chart:before { content:"km\A 80\A\A 60\A\A 40\A\A 20\A\A 0"; white-space:pre; position:absolute; left:0; top:6px; color:#87918e; font-size:9px; line-height:20px; }
+.line-chart svg { width:100%; height:168px; overflow:visible; }
+.line-chart line { stroke:#263538; stroke-width:.7; }
+.chart-line { fill:none; stroke:var(--green); stroke-width:3; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 0 4px rgba(155,227,24,.35)); stroke-dasharray:700; animation:drawChart 1.15s ease-out both; }
+@keyframes drawChart { from { stroke-dashoffset:700; opacity:.2; } to { stroke-dashoffset:0; opacity:1; } }
+.chart-dates { display:flex; justify-content:space-between; color:#8f9996; font-size:9px; transform:translateY(-1px); }
+
+.bike-summary-card { position:absolute; top:-210px; right:0; width:calc((100% - 28px) * .88 / 3.08); height:407px; padding:18px; z-index:2; }
+.bike-card-chevron { border:0; background:transparent; color:#e3e8e6; font-size:24px; line-height:1; }
+.bike-product-visual { height:208px; display:grid; place-items:center; background:radial-gradient(ellipse at center,rgba(35,63,53,.32),rgba(4,12,14,0) 67%); overflow:hidden; }
+.bike-product-visual img { width:112%; max-width:none; height:100%; object-fit:contain; filter:drop-shadow(0 18px 20px rgba(0,0,0,.62)); }
+.bike-title-row { display:flex; justify-content:space-between; align-items:center; gap:10px; }
+.bike-title-row h3 { font-size:15px; margin:0; }
+.bike-specs { display:flex; align-items:center; justify-content:space-between; gap:7px; padding:13px 0; border-bottom:1px solid #283638; color:#abb3b1; }
+.bike-specs span { display:flex; align-items:center; gap:4px; font-size:10px; white-space:nowrap; }
+.bike-specs svg { width:15px; height:15px; }
+.bike-status { display:flex; gap:10px; padding-top:12px; align-items:flex-start; }
+.bike-status>strong { width:18px; height:18px; border-radius:50%; display:grid; place-items:center; background:var(--green); color:#071006; font-size:11px; }
+.bike-status b,.bike-status small { display:block; }
+.bike-status b { font-size:12px; }
+.bike-status small { color:#818b88; font-size:9px; margin-top:5px; }
+
+.carousel-actions { display:flex; gap:6px; }
+.carousel-actions button { width:31px; height:31px; border-radius:50%; border:1px solid #2b393c; background:#0b1518; color:#c5cdca; font-size:19px; }
+.recommendations-card { padding:14px 12px; }
+.recommendations { height:121px; }
+.recommendation { min-height:121px; padding:14px; border:1px solid rgba(255,255,255,.05); box-shadow:inset 0 1px 0 rgba(255,255,255,.06); }
+.recommendation strong { font-size:17px; }
+.recommendation span { font-size:11px; }
+.recommendation button { font-size:11px; padding:6px 10px; }
+.recommendation--purple { background:linear-gradient(145deg,#47296a,#1b1230); }
+.recommendation--blue { background:linear-gradient(145deg,#174a77,#071d34); }
+.recommendation--green { background:linear-gradient(145deg,#315f08,#132604); }
+
+.station-highlight { height:84px; display:flex; align-items:center; gap:10px; border:1px solid #263538; border-radius:9px; padding:11px; background:#071114; }
+.station-highlight>svg { width:29px; color:var(--green); }
+.station-highlight>div { flex:1; }
+.station-highlight strong,.station-highlight span,.station-highlight b { display:block; }
+.station-highlight strong { font-size:13px; }
+.station-highlight span { color:#919b98; font-size:10px; margin:4px 0; }
+.station-highlight b { color:var(--green); font-size:11px; }
+.station-highlight em { border:1px solid #344245; border-radius:7px; padding:7px 9px; font-size:11px; color:#b4bcba; font-style:normal; }
+
+.event-preview { display:flex; gap:14px; height:117px; }
+.event-preview>img { width:124px; height:108px; border-radius:7px; object-fit:cover; }
+.event-preview>div { flex:1; min-width:0; }
+.event-preview h3 { margin:3px 0 8px; font-size:16px; }
+.event-preview span { display:block; color:#aab2b0; font-size:10px; margin:5px 0; white-space:nowrap; }
+.event-preview .button { min-height:31px; margin-top:7px; padding:0 15px; border-color:#6b9f0d; color:var(--green); font-size:11px; }
+.benefit-highlight { height:78px; display:flex; gap:10px; align-items:center; padding:10px; border:1px solid #263538; border-radius:9px; background:#071114; }
+.benefit-icon { width:38px; height:38px; display:grid; place-items:center; border-radius:7px; background:#d8dbd8; color:#071012; }
+.benefit-icon svg { width:21px; }
+.benefit-highlight>div:nth-child(2) { flex:1; }
+.benefit-highlight strong,.benefit-highlight span { display:block; }
+.benefit-highlight strong { font-size:11px; }
+.benefit-highlight span { color:#8e9895; font-size:9px; margin-top:5px; }
+.benefit-highlight>b { color:#00b9dd; font-size:10px; }
+.dashboard-dots { display:flex; justify-content:center; gap:12px; padding:18px 0 0; }
+.dashboard-dots i { width:9px; height:9px; border-radius:50%; background:#3d4546; }
+.dashboard-dots i:first-child { background:var(--green); }
+
+@media (max-width:1400px) {
+  .dashboard-stats { width:100%; }
+  .dashboard-grid { grid-template-columns:1fr 1fr; grid-template-rows:auto; grid-template-areas:"activity performance" "bike event" "recommend stations" "benefits benefits"; }
+  .bike-summary-card { position:relative; top:auto; right:auto; width:auto; height:auto; grid-area:bike; }
+  .event-card { align-self:stretch; height:auto; }
+}
+@media (max-width:920px) {
+  .app-main { margin-left:0; width:100%; }
+  .topbar { left:0; height:78px; }
+  .dashboard-page { padding-top:88px; }
+  .dashboard-stats { grid-template-columns:1fr 1fr; }
+  .stat-card--combined { grid-column:span 2; }
+}
+@media (max-width:700px) {
+  .dashboard-stats,.dashboard-grid { grid-template-columns:1fr; }
+  .dashboard-grid { grid-template-areas:"activity" "performance" "bike" "event" "recommend" "stations" "benefits"; }
+  .stat-card--combined { grid-column:auto; }
+  .dashboard-heading h1 { font-size:26px; }
+}
