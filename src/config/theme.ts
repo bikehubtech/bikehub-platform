@@ -1,13 +1,13 @@
 export const bikeHubTheme = {
   colors: {
-    background: "#050b0e",
-    surface: "#0b1519",
-    surfaceElevated: "#111d22",
-    border: "#26363b",
-    text: "#f6f7f5",
+    background: "#0d1117",
+    surface: "#1a1f27",
+    surfaceElevated: "#2b313a",
+    border: "#2b313a",
+    text: "#e5e7eb",
     textMuted: "#93a0a4",
-    primary: "#9be318",
-    primaryDark: "#79c20e",
+    primary: "#8cd700",
+    primaryDark: "#4caf00",
     warning: "#ffb020",
   },
 } as const;

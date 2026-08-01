@@ -38,7 +38,7 @@ export function Bike() {
                 </div>
                 <Button variant="secondary">Editar bike</Button>
               </div>
-              <div className="bike-large-visual"><Icon name="bike" /></div>
+              <div className="bike-large-visual"><img src="/assets/dashboard-bike.png" alt="Specialized Epic Comp 2021" /></div>
               <div className="status-ok">✓ Tudo certo com sua bike</div>
               <small>Última atualização: 17/05/2025</small>
             </Card>
