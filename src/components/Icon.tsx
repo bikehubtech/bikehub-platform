@@ -1,6 +1,6 @@
 import type { SVGProps } from "react";
 
-type IconName =
+export type IconName =
   | "dashboard" | "bike" | "club" | "gift" | "tool" | "market"
   | "calendar" | "drop" | "bell" | "user" | "settings" | "search"
   | "route" | "star" | "pin" | "shield" | "menu" | "chevron"

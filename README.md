@@ -41,12 +41,18 @@ Não é necessário enviar arquivos manualmente ao GitHub ou ao Netlify.
 
 ```text
 src/
+  config/      Tema e configuração de integrações
   components/  Componentes reutilizáveis
+  contexts/    Contextos React compartilhados
+  hooks/       Hooks de domínio e integração
   layout/      Estrutura global de navegação
   pages/       Telas da plataforma
+  routes/      Metadados e organização da navegação
   services/    Integrações externas futuras
+  store/       Contratos de estado global
   styles/      Estilos globais e identidade visual
   types/       Tipos compartilhados
+  utils/       Utilitários sem dependência de interface
 public/
   assets/      Arquivos estáticos públicos
 ```

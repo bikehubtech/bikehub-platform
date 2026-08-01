@@ -1,20 +1,7 @@
 import { Brand } from "../components/Brand";
 import { Icon } from "../components/Icon";
+import { navigationItems } from "../routes";
 import type { PageId } from "../types";
-
-const items: Array<{ id: PageId; label: string; icon: Parameters<typeof Icon>[0]["name"] }> = [
-  { id: "dashboard", label: "Dashboard", icon: "dashboard" },
-  { id: "bike", label: "Minha Bike", icon: "bike" },
-  { id: "club", label: "Clube do Ciclista", icon: "club" },
-  { id: "benefits", label: "Benefícios", icon: "gift" },
-  { id: "workshops", label: "Oficinas", icon: "tool" },
-  { id: "marketplace", label: "Marketplace", icon: "market" },
-  { id: "events", label: "Eventos", icon: "calendar" },
-  { id: "stations", label: "Estações", icon: "drop" },
-  { id: "notifications", label: "Notificações", icon: "bell" },
-  { id: "profile", label: "Perfil", icon: "user" },
-  { id: "settings", label: "Configurações", icon: "settings" },
-];
 
 export function Sidebar({
   active,
@@ -45,7 +32,7 @@ export function Sidebar({
         </div>
 
         <nav className="sidebar__nav">
-          {items.map((item) => (
+          {navigationItems.map((item) => (
             <button
               key={item.id}
               className={active === item.id ? "is-active" : ""}
