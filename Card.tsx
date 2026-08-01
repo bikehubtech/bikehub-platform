@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { ReactNode } from "react";
 import { Sidebar } from "./components/Sidebar";
 import { Topbar } from "./components/Topbar";
 import { Access } from "./pages/Access";
@@ -23,7 +24,7 @@ export default function App() {
     return <Login onSuccess={() => setStage("app")} onBack={() => setStage("access")} />;
   }
 
-  const pages: Record<PageId, React.ReactNode> = {
+  const pages: Record<PageId, ReactNode> = {
     dashboard: <Dashboard onOpenBike={() => setPage("bike")} onOpenStations={() => setPage("stations")} onOpenBenefits={() => setPage("benefits")} />,
     bike: <Bike />,
     club: <Club />,
