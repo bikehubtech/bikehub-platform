@@ -1,6 +1,6 @@
-# BikeHub Platform
+# Gnexis Platform
 
-BikeHub Foundation v1.0: base web do ecossistema BikeHub, reconstruída em React, TypeScript e Vite.
+Gnexis Foundation v1.0: base web do ecossistema Gnexis, reconstruída em React, TypeScript e Vite.
 
 ## Requisitos
 

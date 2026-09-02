@@ -1,4 +1,4 @@
-export const bikeHubTheme = {
+export const gnexisTheme = {
   colors: {
     background: "#0d1117",
     surface: "#1a1f27",
@@ -12,10 +12,10 @@ export const bikeHubTheme = {
   },
 } as const;
 
-export type BikeHubTheme = typeof bikeHubTheme;
-export type BikeHubColor = keyof BikeHubTheme["colors"];
+export type GnexisTheme = typeof gnexisTheme;
+export type GnexisColor = keyof GnexisTheme["colors"];
 
-const cssVariables: Record<BikeHubColor, `--${string}`> = {
+const cssVariables: Record<GnexisColor, `--${string}`> = {
   background: "--bg",
   surface: "--surface",
   surfaceElevated: "--surface-2",
@@ -27,8 +27,8 @@ const cssVariables: Record<BikeHubColor, `--${string}`> = {
   warning: "--warning",
 };
 
-export function applyBikeHubTheme(root: HTMLElement = document.documentElement) {
+export function applyGnexisTheme(root: HTMLElement = document.documentElement) {
   for (const [token, variable] of Object.entries(cssVariables)) {
-    root.style.setProperty(variable, bikeHubTheme.colors[token as BikeHubColor]);
+    root.style.setProperty(variable, gnexisTheme.colors[token as GnexisColor]);
   }
 }
