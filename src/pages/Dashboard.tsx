@@ -1,7 +1,9 @@
+import { useRef, useState } from "react";
 import { Button } from "../components/Button";
 import { Card } from "../components/Card";
 import { Icon } from "../components/Icon";
 import { StatCard } from "../components/StatCard";
+import { useToast } from "../hooks";
 
 const activities = [
   ["drop", "Lavagem realizada", "Gnexis Vila Madalena", "Hoje, 09:15", "Concluída"],
@@ -10,13 +12,33 @@ const activities = [
   ["star", "Você ganhou 100 pontos", "Por manter suas manutenções em dia", "18/05/2025", "+100 pts"],
 ] as const;
 
+const moreActivities = [
+  ["tool", "Revisão de freios", "Troca de pastilhas dianteiras", "15/05/2025", "Concluída"],
+  ["route", "Pedal registrado", "Volta do Lago · 22,3 km", "12/05/2025", ""],
+] as const;
+
+const chartRanges = ["Semana", "Mês", "Ano"] as const;
+type ChartRange = (typeof chartRanges)[number];
+
 const performancePoints = "0,75 24,102 48,118 72,92 96,82 120,104 144,92 168,112 192,78 216,55 240,70 264,82 288,86 312,60 336,48 360,70 384,58 408,24 432,24";
 
-export function Dashboard({ onOpenBike, onOpenStations, onOpenBenefits }: {
+export function Dashboard({ onOpenBike, onOpenStations, onOpenBenefits, onOpenEvents }: {
   onOpenBike: () => void;
   onOpenStations: () => void;
   onOpenBenefits: () => void;
+  onOpenEvents: () => void;
 }) {
+  const { showToast } = useToast();
+  const [showAllActivity, setShowAllActivity] = useState(false);
+  const [chartRange, setChartRange] = useState<ChartRange>("Mês");
+  const recommendationsRef = useRef<HTMLDivElement>(null);
+
+  const visibleActivities = showAllActivity ? [...activities, ...moreActivities] : activities;
+
+  function scrollRecommendations(direction: "left" | "right") {
+    recommendationsRef.current?.scrollBy({ left: direction === "left" ? -220 : 220, behavior: "smooth" });
+  }
+
   return (
     <div className="page dashboard-page">
       <div className="page-heading dashboard-heading">
@@ -44,10 +66,10 @@ export function Dashboard({ onOpenBike, onOpenStations, onOpenBenefits }: {
       </section>
 
       <section className="dashboard-grid">
-        <Card className="activity-card" title="Atividade recente" action={<button className="text-action">Ver todas</button>}>
+        <Card className="activity-card" title="Atividade recente" action={<button className="text-action" onClick={() => setShowAllActivity((v) => !v)}>{showAllActivity ? "Ver menos" : "Ver todas"}</button>}>
           <div className="activity-list">
-            {activities.map(([icon, title, subtitle, date, status]) => (
-              <div className="activity-row" key={title}>
+            {visibleActivities.map(([icon, title, subtitle, date, status]) => (
+              <div className="activity-row" key={`${title}-${subtitle}`}>
                 <Icon name={icon} />
                 <div><strong>{title}</strong><span>{subtitle}</span></div>
                 <small>{date}{status && <em>{status}</em>}</small>
@@ -57,8 +79,14 @@ export function Dashboard({ onOpenBike, onOpenStations, onOpenBenefits }: {
           </div>
         </Card>
 
-        <Card className="performance-card" title="Seu desempenho" action={<button className="text-action">Ver detalhes</button>}>
-          <div className="chart-tabs"><span>Semana</span><strong>Mês</strong><span>Ano</span></div>
+        <Card className="performance-card" title="Seu desempenho" action={<button className="text-action" onClick={() => showToast("Relatório detalhado disponível em breve.")}>Ver detalhes</button>}>
+          <div className="chart-tabs">
+            {chartRanges.map((range) => (
+              <button key={range} type="button" className={range === chartRange ? "is-active" : ""} onClick={() => setChartRange(range)}>
+                {range}
+              </button>
+            ))}
+          </div>
           <div className="metric-strip">
             <span><small>Distância</small><strong>325 km</strong></span>
             <span><small>Tempo</small><strong>14h 32m</strong></span>
@@ -88,11 +116,11 @@ export function Dashboard({ onOpenBike, onOpenStations, onOpenBenefits }: {
           <div className="bike-status"><strong>✓</strong><div><b>Tudo certo com sua bike</b><small>Última atualização: 17/05/2025</small></div></div>
         </Card>
 
-        <Card className="recommendations-card" title="Recomendado para você" action={<div className="carousel-actions"><button>‹</button><button>›</button></div>}>
-          <div className="recommendations">
-            <article className="recommendation recommendation--purple"><strong>15% OFF</strong><span>em acessórios</span><button>Ver cupom</button></article>
-            <article className="recommendation recommendation--blue"><strong>Checklist pré-pedal</strong><span>Cuide da sua bike antes da aventura.</span><button>Ver checklist</button></article>
-            <article className="recommendation recommendation--green"><strong>Treino sugerido</strong><span>Base endurance · 60–90 min.</span><button>Iniciar treino</button></article>
+        <Card className="recommendations-card" title="Recomendado para você" action={<div className="carousel-actions"><button onClick={() => scrollRecommendations("left")}>‹</button><button onClick={() => scrollRecommendations("right")}>›</button></div>}>
+          <div className="recommendations" ref={recommendationsRef}>
+            <article className="recommendation recommendation--purple"><strong>15% OFF</strong><span>em acessórios</span><button onClick={() => showToast("Cupom aplicado! Válido na próxima compra.")}>Ver cupom</button></article>
+            <article className="recommendation recommendation--blue"><strong>Checklist pré-pedal</strong><span>Cuide da sua bike antes da aventura.</span><button onClick={() => showToast("Checklist copiado para suas tarefas.")}>Ver checklist</button></article>
+            <article className="recommendation recommendation--green"><strong>Treino sugerido</strong><span>Base endurance · 60–90 min.</span><button onClick={() => showToast("Treino iniciado. Bom pedal!")}>Iniciar treino</button></article>
           </div>
         </Card>
 
@@ -100,8 +128,8 @@ export function Dashboard({ onOpenBike, onOpenStations, onOpenBenefits }: {
           <div className="station-highlight"><Icon name="pin" /><div><strong>Gnexis Vila Madalena</strong><span>Rua Harmonia, 123 · São Paulo, SP</span><b>Aberta · 24h</b></div><em>0,8 km</em></div>
         </Card>
 
-        <Card className="event-card" title="Próximo evento" action={<button className="text-action">Ver todos</button>}>
-          <div className="event-preview"><img src="/assets/dashboard-event.jpg" alt="Ciclistas no Pedal do Vale" /><div><h3>Pedal do Vale</h3><span>♧ 25 de Maio · 08:00</span><span>⌖ São José dos Campos · SP</span><Button variant="ghost">Ver detalhes</Button></div></div>
+        <Card className="event-card" title="Próximo evento" action={<button className="text-action" onClick={onOpenEvents}>Ver todos</button>}>
+          <div className="event-preview"><img src="/assets/dashboard-event.jpg" alt="Ciclistas no Pedal do Vale" /><div><h3>Pedal do Vale</h3><span>♧ 25 de Maio · 08:00</span><span>⌖ São José dos Campos · SP</span><Button variant="ghost" onClick={onOpenEvents}>Ver detalhes</Button></div></div>
         </Card>
 
         <Card className="benefits-card" title="Seus benefícios" action={<button className="text-action" onClick={onOpenBenefits}>Ver todos</button>}>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import { Sidebar } from "./layout/Sidebar";
 import { Topbar } from "./layout/Topbar";
@@ -16,6 +16,10 @@ export default function App() {
   const [page, setPage] = useState<PageId>("dashboard");
   const [menuOpen, setMenuOpen] = useState(false);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [stage, page]);
+
   if (stage === "access") {
     return <Access onEnter={() => setStage("app")} onLogin={() => setStage("login")} />;
   }
@@ -25,7 +29,14 @@ export default function App() {
   }
 
   const pages: Record<PageId, ReactNode> = {
-    dashboard: <Dashboard onOpenBike={() => setPage("bike")} onOpenStations={() => setPage("stations")} onOpenBenefits={() => setPage("benefits")} />,
+    dashboard: (
+      <Dashboard
+        onOpenBike={() => setPage("bike")}
+        onOpenStations={() => setPage("stations")}
+        onOpenBenefits={() => setPage("benefits")}
+        onOpenEvents={() => setPage("events")}
+      />
+    ),
     bike: <Bike />,
     club: <Club />,
     benefits: <Benefits />,
