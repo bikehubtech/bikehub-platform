@@ -4,7 +4,7 @@ import { Icon } from "../components/Icon";
 import { StatCard } from "../components/StatCard";
 
 const activities = [
-  ["drop", "Lavagem realizada", "BikeHub Vila Madalena", "Hoje, 09:15", "Concluída"],
+  ["drop", "Lavagem realizada", "Gnexis Vila Madalena", "Hoje, 09:15", "Concluída"],
   ["tool", "Manutenção registrada", "Troca de corrente e lubrificação", "Ontem, 16:40", "Concluída"],
   ["route", "Pedal registrado", "Pedal do Vale · 45,7 km", "18/05/2025", ""],
   ["star", "Você ganhou 100 pontos", "Por manter suas manutenções em dia", "18/05/2025", "+100 pts"],
@@ -97,7 +97,7 @@ export function Dashboard({ onOpenBike, onOpenStations, onOpenBenefits }: {
         </Card>
 
         <Card className="stations-card" title="Estações próximas" action={<button className="text-action" onClick={onOpenStations}>Ver todas</button>}>
-          <div className="station-highlight"><Icon name="pin" /><div><strong>BikeHub Vila Madalena</strong><span>Rua Harmonia, 123 · São Paulo, SP</span><b>Aberta · 24h</b></div><em>0,8 km</em></div>
+          <div className="station-highlight"><Icon name="pin" /><div><strong>Gnexis Vila Madalena</strong><span>Rua Harmonia, 123 · São Paulo, SP</span><b>Aberta · 24h</b></div><em>0,8 km</em></div>
         </Card>
 
         <Card className="event-card" title="Próximo evento" action={<button className="text-action">Ver todos</button>}>
