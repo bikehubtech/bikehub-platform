@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { applyBikeHubTheme } from "./config/theme";
+import { applyGnexisTheme } from "./config/theme";
 import "./styles/global.css";
 
-applyBikeHubTheme();
+applyGnexisTheme();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
