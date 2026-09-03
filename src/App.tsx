@@ -7,25 +7,41 @@ import { Login } from "./pages/Login";
 import { Dashboard } from "./pages/Dashboard";
 import { Bike } from "./pages/Bike";
 import { Club, Benefits, Workshops, Marketplace, Events, Stations, Notifications, Profile, Settings } from "./pages/Modules";
+import { useAuth } from "./hooks";
 import type { PageId } from "./types";
 
-type Stage = "access" | "login" | "app";
+type Stage = "access" | "login";
 
 export default function App() {
+  const { user, isLoading } = useAuth();
   const [stage, setStage] = useState<Stage>("access");
   const [page, setPage] = useState<PageId>("dashboard");
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [stage, page]);
+  }, [user, stage, page]);
 
-  if (stage === "access") {
-    return <Access onEnter={() => setStage("app")} onLogin={() => setStage("login")} />;
+  useEffect(() => {
+    if (!user) {
+      setStage("access");
+      setPage("dashboard");
+    }
+  }, [user]);
+
+  if (isLoading) {
+    return (
+      <main className="auth-loading">
+        <div className="auth-loading__spinner" />
+      </main>
+    );
   }
 
-  if (stage === "login") {
-    return <Login onSuccess={() => setStage("app")} onBack={() => setStage("access")} />;
+  if (!user) {
+    if (stage === "login") {
+      return <Login onBack={() => setStage("access")} />;
+    }
+    return <Access onLogin={() => setStage("login")} />;
   }
 
   const pages: Record<PageId, ReactNode> = {
