@@ -1,8 +1,23 @@
+import { useState } from "react";
 import { Brand } from "../components/Brand";
 import { Button } from "../components/Button";
 import { Icon } from "../components/Icon";
+import { useAuth, useToast } from "../hooks";
 
-export function Access({ onEnter, onLogin }: { onEnter: () => void; onLogin: () => void }) {
+export function Access({ onLogin }: { onLogin: () => void }) {
+  const { enterDemo } = useAuth();
+  const { showToast } = useToast();
+  const [entering, setEntering] = useState(false);
+
+  async function handleEnter() {
+    setEntering(true);
+    const result = await enterDemo();
+    setEntering(false);
+    if (!result.ok) {
+      showToast(result.error);
+    }
+  }
+
   return (
     <main className="access">
       <section className="access__content">
@@ -16,7 +31,7 @@ export function Access({ onEnter, onLogin }: { onEnter: () => void; onLogin: () 
           <span><Icon name="bike" /> Gestão da sua bike</span>
         </div>
         <div className="access__actions">
-          <Button onClick={onEnter}>Entrar como Jhonatan Ilha</Button>
+          <Button onClick={handleEnter} disabled={entering}>{entering ? "Entrando..." : "Entrar como Jhonatan Ilha"}</Button>
           <Button variant="secondary" onClick={onLogin}>Entrar com e-mail</Button>
         </div>
       </section>
