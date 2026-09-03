@@ -3,7 +3,7 @@ import { Button } from "../components/Button";
 import { Card } from "../components/Card";
 import { Icon } from "../components/Icon";
 import { StatCard } from "../components/StatCard";
-import { useToast } from "../hooks";
+import { useAuth, useToast } from "../hooks";
 
 const activities = [
   ["drop", "Lavagem realizada", "Gnexis Vila Madalena", "Hoje, 09:15", "Concluída"],
@@ -29,10 +29,12 @@ export function Dashboard({ onOpenBike, onOpenStations, onOpenBenefits, onOpenEv
   onOpenEvents: () => void;
 }) {
   const { showToast } = useToast();
+  const { user } = useAuth();
   const [showAllActivity, setShowAllActivity] = useState(false);
   const [chartRange, setChartRange] = useState<ChartRange>("Mês");
   const recommendationsRef = useRef<HTMLDivElement>(null);
 
+  const firstName = (user?.displayName || "Ciclista").trim().split(/\s+/)[0];
   const visibleActivities = showAllActivity ? [...activities, ...moreActivities] : activities;
 
   function scrollRecommendations(direction: "left" | "right") {
@@ -42,7 +44,7 @@ export function Dashboard({ onOpenBike, onOpenStations, onOpenBenefits, onOpenEv
   return (
     <div className="page dashboard-page">
       <div className="page-heading dashboard-heading">
-        <div><h1>Olá, Jhonatan Ilha! <span>👋</span></h1><p>Tudo o que você precisa para viver o ciclismo ao máximo.</p></div>
+        <div><h1>Olá, {firstName}! <span>👋</span></h1><p>Tudo o que você precisa para viver o ciclismo ao máximo.</p></div>
       </div>
 
       <section className="stats-grid dashboard-stats">
