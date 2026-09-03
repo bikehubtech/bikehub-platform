@@ -1,5 +1,6 @@
 import { Brand } from "../components/Brand";
 import { Icon } from "../components/Icon";
+import { useAuth } from "../hooks";
 import { navigationItems } from "../routes";
 import type { PageId } from "../types";
 
@@ -14,6 +15,9 @@ export function Sidebar({
   open: boolean;
   onClose: () => void;
 }) {
+  const { user, signOut } = useAuth();
+  const displayName = user?.displayName || "Ciclista";
+
   return (
     <>
       {open && <button className="scrim" aria-label="Fechar menu" onClick={onClose} />}
@@ -24,11 +28,14 @@ export function Sidebar({
         </div>
 
         <div className="user-card">
-          <div className="user-card__avatar"><img src="/assets/dashboard-avatar.jpg" alt="Jhonatan Ilha" /></div>
+          <div className="user-card__avatar"><img src="/assets/dashboard-avatar.jpg" alt={displayName} /></div>
           <div>
-            <strong>Jhonatan Ilha</strong>
+            <strong>{displayName}</strong>
             <span>Clube · Nível 2 · 1.250 pts</span>
           </div>
+          <button className="user-card__logout" title="Sair" aria-label="Sair" onClick={() => signOut()}>
+            <Icon name="logout" />
+          </button>
         </div>
 
         <nav className="sidebar__nav">
