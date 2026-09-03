@@ -3,7 +3,7 @@ import { Button } from "../components/Button";
 import { Card } from "../components/Card";
 import { Icon } from "../components/Icon";
 import { StatCard } from "../components/StatCard";
-import { useToast } from "../hooks";
+import { useAuth, useToast } from "../hooks";
 
 const challenges = [
   ["route", "Desafio 200 km", "Complete 200 km durante o mês e ganhe 300 pontos."],
@@ -346,35 +346,47 @@ export function Notifications() {
   </div>
 }
 
+function initials(name: string) {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return "?";
+  return (parts[0][0] + (parts[1]?.[0] ?? "")).toUpperCase();
+}
+
 export function Profile() {
   const { showToast } = useToast();
+  const { user, updateDisplayName } = useAuth();
   const [editing, setEditing] = useState(false);
-  const [fields, setFields] = useState({
-    "Nome completo": "Jhonatan Ilha",
-    "E-mail": "Não informado",
-    "Telefone": "(49) 99999-9999",
-    "Cidade": "Xaxim - SC",
-  });
+  const [saving, setSaving] = useState(false);
+  const [name, setName] = useState(user?.displayName ?? "Ciclista");
+  const [phone, setPhone] = useState("(49) 99999-9999");
+  const [city, setCity] = useState("Xaxim - SC");
+  const email = user?.email ?? (user?.isAnonymous ? "Conta demonstrativa (sem e-mail)" : "Não informado");
 
-  function updateField(label: string, value: string) {
-    setFields((current) => ({ ...current, [label]: value }));
-  }
-
-  function handleAction() {
-    if (editing) {
-      showToast("Perfil atualizado com sucesso.");
+  async function handleAction() {
+    if (!editing) {
+      setEditing(true);
+      return;
     }
-    setEditing((v) => !v);
+    setSaving(true);
+    const result = await updateDisplayName(name);
+    setSaving(false);
+    if (result.ok) {
+      showToast("Perfil atualizado com sucesso.");
+      setEditing(false);
+    } else {
+      showToast(result.error);
+    }
   }
 
-  return <div className="page"><div className="page-heading page-heading--with-action"><div><h1>Perfil</h1><p>Gerencie suas informações e preferências.</p></div><Button onClick={handleAction}>{editing ? "Salvar alterações" : "Editar perfil"}</Button></div>
+  return <div className="page"><div className="page-heading page-heading--with-action"><div><h1>Perfil</h1><p>Gerencie suas informações e preferências.</p></div><Button onClick={handleAction} disabled={saving}>{saving ? "Salvando..." : editing ? "Salvar alterações" : "Editar perfil"}</Button></div>
     <div className="profile-grid">
-      <Card className="profile-card"><div className="profile-avatar">JI</div><h2>{fields["Nome completo"]}</h2><p>Membro desde maio de 2025</p><div className="tags"><span>MTB</span><span>Intermediário</span><span>Nível 2</span></div></Card>
+      <Card className="profile-card"><div className="profile-avatar">{initials(name)}</div><h2>{name}</h2><p>Membro desde maio de 2025</p><div className="tags"><span>MTB</span><span>Intermediário</span><span>Nível 2</span></div></Card>
       <Card title="Dados pessoais">
         <div className="form-grid">
-          {Object.entries(fields).map(([label,value]) => (
-            <label key={label}>{label}<input value={value} readOnly={!editing} onChange={(e) => updateField(label, e.target.value)}/></label>
-          ))}
+          <label>Nome completo<input value={name} readOnly={!editing} onChange={(e) => setName(e.target.value)}/></label>
+          <label>E-mail<input value={email} readOnly title="O e-mail é gerenciado pela sua conta de acesso."/></label>
+          <label>Telefone<input value={phone} readOnly={!editing} onChange={(e) => setPhone(e.target.value)}/></label>
+          <label>Cidade<input value={city} readOnly={!editing} onChange={(e) => setCity(e.target.value)}/></label>
         </div>
       </Card>
     </div>
@@ -382,6 +394,8 @@ export function Profile() {
 }
 
 export function Settings() {
+  const { user, signOut } = useAuth();
+  const { showToast } = useToast();
   const rows = [
     ["bell", "Notificações de manutenção", "Receber lembretes e alertas preventivos"],
     ["gift", "Novos benefícios", "Receber avisos de cupons e campanhas"],
@@ -394,5 +408,15 @@ export function Settings() {
     setOn((current) => current.map((v, idx) => (idx === i ? !v : v)));
   }
 
-  return <div className="page"><div className="page-heading"><div><h1>Configurações</h1><p>Controle notificações, privacidade e preferências.</p></div></div><div className="settings-list">{rows.map(([icon,title,text],i) => <article className="setting-row" key={title}><Icon name={icon}/><div><strong>{title}</strong><span>{text}</span></div><button className={`switch ${on[i] ? "is-on" : ""}`} onClick={() => toggle(i)}><i/></button></article>)}</div></div>
+  async function handleLogout() {
+    await signOut();
+    showToast("Sessão encerrada.");
+  }
+
+  return <div className="page"><div className="page-heading"><div><h1>Configurações</h1><p>Controle notificações, privacidade e preferências.</p></div></div><div className="settings-list">{rows.map(([icon,title,text],i) => <article className="setting-row" key={title}><Icon name={icon}/><div><strong>{title}</strong><span>{text}</span></div><button className={`switch ${on[i] ? "is-on" : ""}`} onClick={() => toggle(i)}><i/></button></article>)}</div>
+    <Card title="Conta" className="account-card">
+      <div className="list-row"><Icon name="user"/><div><strong>{user?.displayName ?? "Ciclista"}</strong><span>{user?.email ?? (user?.isAnonymous ? "Conta demonstrativa" : "")}</span></div></div>
+      <Button full variant="secondary" onClick={handleLogout}>Sair da conta</Button>
+    </Card>
+  </div>
 }
