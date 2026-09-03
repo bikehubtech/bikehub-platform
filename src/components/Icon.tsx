@@ -5,7 +5,7 @@ export type IconName =
   | "calendar" | "drop" | "bell" | "user" | "settings" | "search"
   | "route" | "star" | "pin" | "shield" | "menu" | "chevron"
   | "file" | "clock" | "mountain" | "flame" | "users" | "trophy"
-  | "link" | "close";
+  | "link" | "close" | "logout";
 
 export function Icon({ name, ...props }: SVGProps<SVGSVGElement> & { name: IconName }) {
   const common = {
@@ -45,6 +45,7 @@ export function Icon({ name, ...props }: SVGProps<SVGSVGElement> & { name: IconN
     trophy: <><path d="M8 4h8v5a4 4 0 0 1-8 0V4Z"/><path d="M8 6H4v2a4 4 0 0 0 4 4M16 6h4v2a4 4 0 0 1-4 4M12 13v5M8 22h8M9 18h6"/></>,
     link: <><path d="M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1"/><path d="M14 11a5 5 0 0 0-7.1-.1l-2 2A5 5 0 0 0 12 20l1.1-1.1"/></>,
     close: <path d="M6 6l12 12M18 6 6 18"/>,
+    logout: <><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></>,
   };
 
   return <svg {...common}>{paths[name]}</svg>;
