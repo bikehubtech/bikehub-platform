@@ -17,3 +17,8 @@ export const firebaseEnvironment: FirebaseEnvironment = {
   messagingSenderId: readEnvironmentValue("VITE_FIREBASE_MESSAGING_SENDER_ID"),
   appId: readEnvironmentValue("VITE_FIREBASE_APP_ID"),
 };
+
+// Quando true, o app conecta no Firebase Auth Emulator local (127.0.0.1:9099)
+// em vez do projeto Firebase real — útil para testar a integração sem criar
+// um projeto na nuvem. Ative com VITE_FIREBASE_USE_EMULATOR=true.
+export const useFirebaseEmulator = readEnvironmentValue("VITE_FIREBASE_USE_EMULATOR") === "true";
